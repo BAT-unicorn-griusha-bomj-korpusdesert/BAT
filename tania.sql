@@ -9,12 +9,22 @@ CREATE TABLE
         UserId INT NOT NULL references Users (Id),
     );
 
--- table OrderItems
+-- table OrderProducts
 CREATE TABLE
-    OrderItems (
+    OrderProducts (
         Id INT PRIMARY KEY IDENTITY (1, 1),
         OrderId INT NOT NULL references Orders (Id),
         ProductId INT NOT NULL references Products (Id),
-        Quantity INT NOT NULL,
-        Price money NOT NULL
+        Amount INT NOT NULL,
+    );      
+
+    -- table Feedback
+CREATE TABLE
+    Feedback (
+        Id INT PRIMARY KEY IDENTITY (1, 1),
+        UserId INT NOT NULL references Users (Id),
+        Image VARCHAR(255) NULL,
+        Text VARCHAR(255) NOT NULL,
+        Date DATETIME NOT NULL,
+        Rating INT NOT NULL CHECK (Rating >= 1 AND Rating <= 5)
     );
